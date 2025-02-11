@@ -11,8 +11,8 @@ export const sendEmail = async({email,emailType,userId}:any)=>{
         }
         else if(emailType === "RESET"){
             await User.findByIdAndUpdate(userId,
-                {forgetPasswordToken:hashedToken,
-                    forgetPasswordTokenExpiry:Date.now()+3600000})
+               {$set: {forgetPasswordToken:hashedToken,
+                    forgetPasswordTokenExpiry:Date.now()+3600000}})
         }
 var transport = nodemailer.createTransport({
     host: "sandbox.smtp.mailtrap.io",
